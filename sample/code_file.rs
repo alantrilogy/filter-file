@@ -37,7 +37,16 @@ fn main() -> Result<()> {
     let input = File::open(&opts.input)?;
     let mut output_lines: Vec<String> = vec![];
 
-    for line in BufReader::new(input).lines() {
+    let mut start: usize = 0;
+    let mut range: usize = usize::MAX;
+    if let Some(opts_from) = opts.from {
+        start = if opts_from == 0 { 0 } else { opts_from - 1 }
+    }
+    if let Some(opts_to) = opts.to {
+        range = opts_to - start
+    }
+
+    for line in BufReader::new(input).lines().skip(start).take(range) {
         let line_string = line.unwrap();
         let exclude = exclusions
             .iter()

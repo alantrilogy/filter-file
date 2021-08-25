@@ -13,16 +13,12 @@ use filter_file::{
     cli,
     exclusion::Exclusion::{Empty, Only, StartsWith},
 };
-use log::LevelFilter;
 
 fn main() -> Result<()> {
     let opts = cli::Opts::parse();
 
     // Log setup
-    let debug_level = opts.debug;
-    Builder::new()
-        .filter_level(debug_level.unwrap_or_else(LevelFilter::max))
-        .init();
+    Builder::new().filter_level(opts.debug).init();
 
     // Exclusions
     let exclusions = vec![
@@ -37,7 +33,17 @@ fn main() -> Result<()> {
     let input = File::open(&opts.input)?;
     let mut output_lines: Vec<String> = vec![];
 
-    for line in BufReader::new(input).lines() {
+    let mut start: usize = 0;
+    let mut range: usize = usize::MAX;
+    if let Some(opts_from) = opts.from {
+        // Include start line
+        start = if opts_from == 0 { 0 } else { opts_from - 1 }
+    }
+    if let Some(opts_to) = opts.to {
+        range = opts_to - start
+    }
+
+    for line in BufReader::new(input).lines().skip(start).take(range) {
         let line_string = line.unwrap();
         let exclude = exclusions
             .iter()

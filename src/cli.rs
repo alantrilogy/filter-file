@@ -11,6 +11,12 @@ pub struct Opts {
     /// File to clean
     pub input: String,
     /// Debug level
+    #[clap(long, default_value = "info")]
+    pub debug: LevelFilter,
+    /// Start of range to clean
     #[clap(long)]
-    pub debug: Option<LevelFilter>,
+    pub from: Option<usize>,
+    /// End of range to clean
+    #[clap(long)]
+    pub to: Option<usize>,
 }
