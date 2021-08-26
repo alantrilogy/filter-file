@@ -16,3 +16,6 @@ test:
 audit:
     cargo install cargo-audit
     cargo audit
+
+clean: 
+    rm sample/*_cleaned
