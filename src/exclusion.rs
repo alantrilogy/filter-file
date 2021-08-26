@@ -1,7 +1,11 @@
+//! Line exclusions
+//!
+//! Defines categories of lines that should be excluded from the cleaned output
+
 use exclusion_functions::{is_empty, only, starts_with};
 use Exclusion::{Empty, Only, StartsWith};
 
-/// Catergories of lines to be excluded from the source code
+/// Exclusion categories
 pub enum Exclusion {
     /// Empty lines
     Empty,
@@ -18,7 +22,7 @@ pub enum Exclusion {
     StartsWith(String),
     /// Lines that only contain the provided characters
     ///
-    /// This is used to determine lines that are only braces/brackets
+    /// This is commonly used to determine lines that are only braces/brackets
     ///
     /// # Example
     /// ```bash
@@ -30,6 +34,19 @@ pub enum Exclusion {
 }
 
 impl Exclusion {
+    /**
+    Check whether the input line matches this exclusion
+
+    Returns `true` if the input `line` matches this exclusion variant
+
+    # Example
+
+    ```
+    # use fclean::exclusion::Exclusion;
+    let empty = Exclusion::Empty;
+    assert_eq!(empty.check(""), true);
+    ```
+    */
     pub fn check(&self, line: &str) -> bool {
         match self {
             Empty => is_empty(line),

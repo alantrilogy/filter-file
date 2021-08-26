@@ -13,10 +13,10 @@ pub struct Opts {
     /// Debug level
     #[clap(long, default_value = "info")]
     pub debug: LevelFilter,
-    /// Start of range to clean
+    /// Start of range to clean (inclusive)
     #[clap(long)]
     pub from: Option<usize>,
-    /// End of range to clean
+    /// End of range to clean (inclusive)
     #[clap(long)]
     pub to: Option<usize>,
 }
