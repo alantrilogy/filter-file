@@ -79,7 +79,7 @@ mod tests {
         let empty_strings = vec!["", "   "];
 
         for s in empty_strings {
-            assert_eq!(is_empty(s), true)
+            assert!(is_empty(s))
         }
     }
 
@@ -88,7 +88,7 @@ mod tests {
         let empty_strings = vec!["A", " String  "];
 
         for s in empty_strings {
-            assert_eq!(is_empty(s), false)
+            assert!(!is_empty(s))
         }
     }
 
@@ -101,7 +101,7 @@ mod tests {
         ];
 
         for (comment, prefix) in prefixed_strings {
-            assert_eq!(starts_with(comment, prefix), true)
+            assert!(starts_with(comment, prefix))
         }
     }
 
@@ -114,7 +114,7 @@ mod tests {
         ];
 
         for (comment, prefix) in prefixed_strings {
-            assert_eq!(starts_with(comment, prefix), false)
+            assert!(!starts_with(comment, prefix))
         }
     }
 
@@ -124,7 +124,7 @@ mod tests {
         let lines = vec!["  {  ", "   }", "(", ");", "({", "  });", "{{", "}}"];
 
         for line in lines {
-            assert_eq!(only(line, &chars), true);
+            assert!(only(line, &chars));
         }
     }
 
@@ -142,7 +142,7 @@ mod tests {
         ];
 
         for line in lines {
-            assert_eq!(only(line, &chars), false);
+            assert!(!only(line, &chars));
         }
     }
 }
