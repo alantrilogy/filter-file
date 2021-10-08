@@ -48,7 +48,10 @@ fn main() -> Result<()> {
         let exclude = exclusions
             .iter()
             .any(|exclusion| exclusion.check(&line_string));
-        debug!("Exclude ({}) current line: {}", exclude, &line_string);
+
+        let ex_include = if exclude { "✗"} else { "✓" };
+        debug!("{} {}", ex_include, &line_string);
+        
         if !exclude {
             output_lines.push(line_string);
         }
