@@ -1,7 +1,0 @@
-This is a test file
-
-There are spaces
-
-    There are tabs
-
-That is all
