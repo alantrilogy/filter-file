@@ -6,7 +6,7 @@ use fclean::exclusion::Exclusion::{Empty, Only, StartsWith};
 
 fn main() -> Result<()> {
     env_logger::init();
-    
+
     let exclusions = vec![
         Empty,
         Only(vec!['{', '}', '(', ')', ';', '[', ']']),
@@ -22,7 +22,7 @@ fn main() -> Result<()> {
 
     for line_string in input.lines() {
         let exclude = exclusions.iter().any(|e| e.check(line_string));
-        let ex_include = if exclude { "✗"} else { "✓" };
+        let ex_include = if exclude { "✗" } else { "✓" };
 
         debug!("{} {}", ex_include, &line_string);
 

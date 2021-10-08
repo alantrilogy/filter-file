@@ -49,9 +49,9 @@ fn main() -> Result<()> {
             .iter()
             .any(|exclusion| exclusion.check(&line_string));
 
-        let ex_include = if exclude { "✗"} else { "✓" };
+        let ex_include = if exclude { "✗" } else { "✓" };
         debug!("{} {}", ex_include, &line_string);
-        
+
         if !exclude {
             output_lines.push(line_string);
         }
